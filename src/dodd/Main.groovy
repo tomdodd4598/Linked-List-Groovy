@@ -15,12 +15,12 @@ class Main {
 		NUMBER_REGEX.matcher(str).matches()
 	}
 	
-	static insertBefore(String val, Item<String> oth) {
-		if (isNumberString(val) && isNumberString(oth.value)) {
-			new BigInteger(val) <= new BigInteger(oth.value)
+	static insertBefore(String val, Item<String> item) {
+		if (isNumberString(val) && isNumberString(item.value)) {
+			new BigInteger(val) <= new BigInteger(item.value)
 		}
 		else {
-			val <= oth.value
+			val <= item.value
 		}
 	}
 	
@@ -74,8 +74,8 @@ class Main {
 				}
 			}
 			else if (input == "l") {
-				println "\nList print..."
-				Helpers.printList start
+				println "\nLoop print..."
+				Helpers.printLoop start
 			}
 			else if (input == "i") {
 				println "\nIterator print..."

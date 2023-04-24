@@ -6,13 +6,13 @@ class Item<T> implements Iterable<Item<T>> {
 	def next
 	
 	Item(value, next) {
+		println "Creating item: $value"
 		this.value = value
 		this.next = next
 	}
 	
 	Item<T> printGetNext() {
-		print value
-		print next ? ", " : "\n"
+		print "$value${next ? ", " : "\n"}"
 		next
 	}
 	
@@ -55,7 +55,7 @@ class Item<T> implements Iterable<Item<T>> {
 		if (item != null) {
 			Item<T> next = item.next
 			if (next != null) {
-				foldback(fSome, fLast, fEmpty, { innerVal -> generator fSome(item, next, innerVal) }, next) as R
+				foldback(fSome, fLast, fEmpty, { generator fSome(item, next, it) }, next) as R
 			}
 			else {
 				generator(fLast(item))

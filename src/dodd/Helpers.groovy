@@ -3,7 +3,6 @@ package dodd
 class Helpers {
 	
 	static <T> Item<T> insertItem(Item<T> start, T val, insertBefore) {
-		println "Creating item: $val"
 		def current = start, previous
 		
 		while (current && !insertBefore(val, current)) {
@@ -51,7 +50,7 @@ class Helpers {
 		null
 	}
 	
-	static <T> void printList(Item<T> start) {
+	static <T> void printLoop(Item<T> start) {
 		while (start) {
 			start = start.printGetNext()
 		}
@@ -74,14 +73,14 @@ class Helpers {
 	static <T> void printFold(Item<T> start) {
 		def fSome = { current, _, accumulator -> "$accumulator${current.value}, " }
 		def fLast = { current, accumulator -> "$accumulator${current.value}\n" }
-		def fEmpty = { accumulator -> accumulator }
+		def fEmpty = { it }
 		print Item.fold(fSome, fLast, fEmpty, "", start)
 	}
 
 	static <T> void printFoldback(Item<T> start) {
 		def fSome = { current, _, innerVal -> "${current.value}, $innerVal" }
-		def fLast = { current -> "${current.value}\n" }
+		def fLast = { "${it.value}\n" }
 		def fEmpty = { "" }
-		print Item.foldback(fSome, fLast, fEmpty, { x -> x }, start)
+		print Item.foldback(fSome, fLast, fEmpty, { it }, start)
 	}
 }
